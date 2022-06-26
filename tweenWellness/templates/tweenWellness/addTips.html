@@ -1,0 +1,67 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sign</title>
+    <style>
+        div {
+            position: absolute;
+            right: 10px;
+            top: 5px
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+
+        <button type="button" onclick="location.href='{% url 'logout' %}'">Logout</button>
+    </div>
+    <H2>Adding a Health Tip</H2>
+    <form action="/tween/tips_add/" method="post">
+        {% csrf_token %}
+        Health Tip Title:
+        <input type="text" name="tips" required><br><br>
+        Health Description:
+        <textarea rows="5" cols="40" name="tips_image" required></textarea>
+        <br><br>
+        Image Uplaod:
+        <input type="file" name="files[]" id="files" required>
+        <input type="hidden" name="url" id="url">
+        <button type="button" onclick="uploadimage()">Upload</button><br><br>
+        <input type="submit" value="Submit">
+
+    </form>
+</body>
+<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+<script>
+    var config = {
+        apiKey: "AIzaSyD-W8-PnNuX4TxxcAaxMtYFKbhIh3mIb5A",
+        authDomain: "tween-wellness-app-6dc50.firebaseapp.com",
+        databaseURL: "https://tween-wellness-app-6dc50-default-rtdb.firebaseio.com",
+        storageBucket: "tween-wellness-app-6dc50.appspot.com",
+        messagingSenderId: "569008204612"
+    };
+    firebase.initializeApp(config);
+    // Get a reference to the storage service, which is used to create references in your storage bucket
+    function uploadimage() {
+        var storage = firebase.storage();
+        var file = document.getElementById("files").files[0];
+        var storageRef = storage.ref();
+        var thisref = storageRef.child(file.name).put(file);
+        thisref.on('state_changed', function (snapshot) {
+            console.log("File uplaoded succesfully!");
+        },
+            function (error) {
+            },
+            function () {
+                // Upload completed successfully, now we can get the download URL
+                var downloadURL = thisref.snapshot.downloadURL;
+                console.log("got url");
+                document.getElementById("url").value = downloadURL;
+                alert("File uploaded successfully!");
+            });
+    }
+</script>
+
+</html>
