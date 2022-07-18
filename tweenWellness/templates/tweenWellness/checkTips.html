@@ -21,8 +21,9 @@
     {% for time,dat,tips in comb_lis %}
 
     Date: {{dat}} &nbsp;Tips: <a href="/tween/tips_check/?z={{time}}">{{tips}}</a>
+    <button type='button' onclick="location.href='/tween/updateTips/?z={{time}}'">Update</button>
+    <button type='button' onclick="location.href='/tween/tips_delete/?z={{time}}'">Delete</button>
     <br>
-
     {% endfor %}
 </body>
 

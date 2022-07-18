@@ -88,6 +88,69 @@ def tips_add(request):
         message = "Oops! User have Logged Out. Please Sign In Again!"
         return render(request, "signIn.html", {"messg": message})
 
+def updateTips(request):
+    time = request.GET.get('z')
+    idtoken = request.session['uid']
+    a = authe.get_account_info(idtoken)
+    a = a['users']
+    a = a[0]
+    a = a['localId']
+
+    placetips = database.child('users').child(a).child('HTips').child(time).child('tips').get().val()
+    img_url = database.child('users').child(a).child('HTips').child(time).child('url').get().val()
+    
+    return render(request, 'updateTips.html', {'time': time, 'w': placetips, 'i': img_url})
+
+def tips_update(request):
+    import datetime
+
+    time = request.GET.get('z')
+
+    idtoken = request.session['uid']
+    a = authe.get_account_info(idtoken)
+    a = a['users']
+    a = a[0]
+    a = a['localId']
+
+    tips = request.POST.get('tips')
+    tips_image = request.POST.get('tips_image')
+    url = request.POST.get('url')
+
+    data = {
+            "tips": tips,
+            'tips_image': tips_image,
+            'url':url
+        }
+
+    database.child('users').child(a).child('HTips').child(time).set(data, idtoken)
+
+    return render(request,'welcome.html')
+
+
+def tips_delete(request):
+    import datetime
+
+    time = request.GET.get('z')
+
+    idtoken = request.session['uid']
+    a = authe.get_account_info(idtoken)
+    a = a['users']
+    a = a[0]
+    a = a['localId']
+    
+    tips = request.POST.get('tips')
+    tips_image = request.POST.get('tips_image')
+    url = request.POST.get('url')
+
+    data = {
+            "tips": tips,
+            'tips_image': tips_image,
+            'url':url
+        }
+
+    database.child('users').child(a).child('HTips').child(time).set(data, idtoken)
+
+    return render(request,'welcome.html')
 
 def checkTips(request):
     import datetime
@@ -111,8 +174,7 @@ def checkTips(request):
 
     for i in lis_time:
 
-        tip = database.child('users').child(a).child(
-            'HTips').child(i).child('tips').get().val()
+        tip = database.child('users').child(a).child('HTips').child(i).child('tips').get().val()
         tips.append(tip)
     print(tips)
 
@@ -143,8 +205,7 @@ def tips_check(request):
     a = a[0]
     a = a['localId']
 
-    tips = database.child('users').child(a).child(
-        'HTips').child(time).child('tips').get().val()
+    tips = database.child('users').child(a).child('HTips').child(time).child('tips').get().val()
     tips_image = database.child('users').child(a).child('HTips').child(time).child('tips_image').get().val()
     img_url = database.child('users').child(a).child('HTips').child(time).child('url').get().val()
     print(img_url)
@@ -156,6 +217,8 @@ def tips_check(request):
 
     return render(request,'tips_check.html',{'w':tips,'p':tips_image,'d':dat,'e':name,'i':img_url})
 
+
+#Temp
 def index(request):
     htips_title = database.child('HTips').child(
         '01').child('Addedby').get().val()

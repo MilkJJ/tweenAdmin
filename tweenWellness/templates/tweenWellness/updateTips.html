@@ -17,21 +17,22 @@
 
         <button type="button" onclick="location.href='{% url 'logout' %}'">Logout</button>
     </div>
-    <H2>Adding a Health Tip</H2>
-    <form action="/tween/tips_add/" method="post">
+    <H2>Update Health Tips</H2>
+    <form action="/tween/tips_update/?z={{time}}" method="post">
         {% csrf_token %}
         Health Tip Title:
-        <input type="text" name="tips" required><br><br>
+        <input type="text" value="{{w}}" name="tips" required><br><br>
+
         Health Description:
+        <br>
         <textarea rows="5" cols="40" name="tips_image" required>Fill in Text</textarea>
         <br><br>
-        Image Uplaod:
+        <img src="{{i}}" width="50%" height="50%">
+        <br></br>
+
+        Image Upload:
         <input type="file" name="files[]" id="files" required>
-
         <input type="hidden" name="url" id="url">
-
-        <button type="button" onclick="uploadimage()">Upload</button><br><br>
-
         <input type="submit" onclick="uploadimage()" value="Submit">
 
     </form>
@@ -53,7 +54,7 @@
         var storageRef = storage.ref();
         var thisref = storageRef.child(file.name).put(file);
         thisref.on('state_changed', function (snapshot) {
-            console.log("Succesfully added tips!");
+            console.log("Succesfully updated tips!");
         },
             function (error) {
             },
@@ -62,7 +63,7 @@
                 var downloadURL = thisref.snapshot.downloadURL;
                 console.log("got url");
                 document.getElementById("url").value = downloadURL;
-                alert("Succesfully added tips!");
+                alert("Succesfully updated tips!");
             });
     }
 </script>

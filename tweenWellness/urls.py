@@ -14,6 +14,13 @@ urlpatterns = [
     path('addTips/',views.addTips,name='addTips'),
     path('tips_add/',views.tips_add,name='tips_add'),
 
+    #Update Health Tips
+    path('updateTips/',views.updateTips,name='updateTips'),
+    path('tips_update/',views.tips_update,name='tips_update'),
+
+    #Delete
+    path('tips_delete/',views.tips_delete,name='tips_delete'),
+
     #Check Health Tips
     path('checkTips/', views.checkTips, name='checkTips'),
     path('tips_check/', views.tips_check, name='tips_check'),
