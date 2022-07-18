@@ -1,38 +1,36 @@
+{% extends 'tweenWellness/base.html' %}
+{% block content %}
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>Sign</title>
     <style>
-        div {
-            position: absolute;
+        button{
             right: 10px;
-            top: 5px
-        }
+        } 
     </style>
 </head>
 
 <body>
-    <div>
-
-        <button type="button" onclick="location.href='{% url 'logout' %}'">Logout</button>
-    </div>
     <H2>Adding a Health Tip</H2>
     <form action="/tween/tips_add/" method="post">
         {% csrf_token %}
         Health Tip Title:
         <input type="text" name="tips" required><br><br>
         Health Description:
-        <textarea rows="5" cols="40" name="tips_image" required>Fill in Text</textarea>
+        <textarea rows="5" cols="40" name="tips_desc" required>Tips Description Here</textarea>
         <br><br>
         Image Uplaod:
         <input type="file" name="files[]" id="files" required>
 
         <input type="hidden" name="url" id="url">
 
-        <button type="button" onclick="uploadimage()">Upload</button><br><br>
+        <button type="button" class="btn btn-dark" onclick="uploadimage()">Upload</button><br><br>
 
-        <input type="submit" onclick="uploadimage()" value="Submit">
+        <input type="submit" class="btn btn-primary" onclick="uploadimage()" value="Submit">
+
+        <button type="button" onclick="location.href='{% url 'checkTips' %}'">Cancel</button><br><br>
 
     </form>
 </body>
@@ -68,3 +66,4 @@
 </script>
 
 </html>
+{% endblock content %}

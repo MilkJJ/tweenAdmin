@@ -1,5 +1,5 @@
-{% extends 'base.html' %}
-{% block title %}
+{% extends 'tweenWellness/base.html' %}
+{% block content %}
 
 {% if messg %}
 <script>
@@ -15,15 +15,16 @@
 
 <body>
     <form action='/tween/postsign/' method='post'>
+        {{ crispy_form }}
         {% csrf_token %}
         Email :
         <input type='email' name='email'>
         Password:
         <input type='password' name='pass'>
-        <input type='submit' value='SignIn'>
+        <input type='submit' value='Sign In'>
     </form>
 </body>
 
 </html>
 
-{% endblock title %}
+{% endblock content %}

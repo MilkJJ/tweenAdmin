@@ -63,7 +63,7 @@ def tips_add(request):
     millis = int(time.mktime(time_now.timetuple()))
     print("mili"+str(millis))
     tips = request.POST.get('tips')
-    tips_image = request.POST.get('tips_image')
+    tips_desc = request.POST.get('tips_desc')
     url = request.POST.get('url')
     try:
         idtoken = request.session['uid']
@@ -75,7 +75,7 @@ def tips_add(request):
 
         data = {
             "tips": tips,
-            'tips_image': tips_image,
+            'tips_desc': tips_desc,
             'url':url
         }
 
@@ -113,12 +113,12 @@ def tips_update(request):
     a = a['localId']
 
     tips = request.POST.get('tips')
-    tips_image = request.POST.get('tips_image')
+    tips_desc = request.POST.get('tips_desc')
     url = request.POST.get('url')
 
     data = {
             "tips": tips,
-            'tips_image': tips_image,
+            'tips_desc': tips_desc,
             'url':url
         }
 
@@ -139,12 +139,12 @@ def tips_delete(request):
     a = a['localId']
     
     tips = request.POST.get('tips')
-    tips_image = request.POST.get('tips_image')
+    tips_desc = request.POST.get('tips_desc')
     url = request.POST.get('url')
 
     data = {
             "tips": tips,
-            'tips_image': tips_image,
+            'tips_desc': tips_desc,
             'url':url
         }
 
@@ -206,7 +206,7 @@ def tips_check(request):
     a = a['localId']
 
     tips = database.child('users').child(a).child('HTips').child(time).child('tips').get().val()
-    tips_image = database.child('users').child(a).child('HTips').child(time).child('tips_image').get().val()
+    tips_desc = database.child('users').child(a).child('HTips').child(time).child('tips_image').get().val()
     img_url = database.child('users').child(a).child('HTips').child(time).child('url').get().val()
     print(img_url)
 
@@ -215,7 +215,7 @@ def tips_check(request):
     name = database.child('users').child(a).child(
         'details').child('name').get().val()
 
-    return render(request,'tips_check.html',{'w':tips,'p':tips_image,'d':dat,'e':name,'i':img_url})
+    return render(request,'tips_check.html',{'w':tips,'p':tips_desc,'d':dat,'e':name,'i':img_url})
 
 
 #Temp

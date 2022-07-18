@@ -1,25 +1,18 @@
+{% extends 'tweenWellness/base.html' %}
+{% block content %}
 <html lang='en'>
 
 <head>
     <meta charset='UTF-8'>
     <title>Title</title>
-    <style>
-        div {
-            position: absolute;
-            right: 10px;
-            top: 5px
-        }
-    </style>
 </head>
 
 <body>
-    <div>
-        <button type="button" onclick="location.href='{% url 'logout' %}'">Logout</button>
-    </div>
     Welcome {{e}}
     <br><br>
-    <button type="button" onclick="location.href='{% url 'addTips' %}'">Add Health Tips</button>
-    <button type="button" onclick="location.href='{% url 'checkTips' %}'">Check Health Tips</button>
+    <button type="button" class="btn btn-success" onclick="location.href='{% url 'addTips' %}'">Add Health Tips</button>
+    <button type="button" class="btn btn-dark" onclick="location.href='{% url 'checkTips' %}'">Check Health Tips</button>
 </body>
 
 </html>
+{% endblock content %}

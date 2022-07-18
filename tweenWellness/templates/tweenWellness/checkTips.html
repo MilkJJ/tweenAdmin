@@ -1,30 +1,34 @@
+{% extends 'tweenWellness/base.html' %}
+{% block content %}
+
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <style>
+    <!--<style>
         div {
             position: absolute;
             right: 10px;
             top: 5px
         }
-    </style>
+    </style> -->
 </head>
 
 <body>
-    <div>
-        <button type="button" onclick="location.href='{% url 'logout' %}'">Logout</button>
-    </div>
     Welcome {{e}}
     <br><br>
+    <button type="button" onclick="location.href='{% url 'addTips' %}'">Add Health Tips</button>
+    <br></br>
     {% for time,dat,tips in comb_lis %}
 
     Date: {{dat}} &nbsp;Tips: <a href="/tween/tips_check/?z={{time}}">{{tips}}</a>
-    <button type='button' onclick="location.href='/tween/updateTips/?z={{time}}'">Update</button>
-    <button type='button' onclick="location.href='/tween/tips_delete/?z={{time}}'">Delete</button>
-    <br>
+    <button type='button' class="btn btn-info" onclick="location.href='/tween/updateTips/?z={{time}}'">Update</button>
+    <button type='button' class="btn btn-danger" onclick="location.href='/tween/tips_delete/?z={{time}}'">Delete</button>
+    <br></br>
     {% endfor %}
 </body>
 
 </html>
+
+{% endblock content %}
