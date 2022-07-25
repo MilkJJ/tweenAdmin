@@ -206,7 +206,7 @@ def tips_check(request):
     a = a['localId']
 
     tips = database.child('users').child(a).child('HTips').child(time).child('tips').get().val()
-    tips_desc = database.child('users').child(a).child('HTips').child(time).child('tips_image').get().val()
+    tips_desc = database.child('users').child(a).child('HTips').child(time).child('tips_desc').get().val()
     img_url = database.child('users').child(a).child('HTips').child(time).child('url').get().val()
     print(img_url)
 
