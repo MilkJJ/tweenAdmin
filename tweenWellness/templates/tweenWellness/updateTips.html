@@ -26,7 +26,7 @@
         <input type="hidden" name="url" id="url">
         <button type="button" class="btn btn-dark" onclick="uploadimage()">Upload</button><br><br>
 
-        <input type="submit" class="btn btn-primary" onclick="uploadimage()" value="Submit">
+        <input type="submit" class="btn btn-primary" value="Submit">
 
         <button type="button" onclick="location.href='{% url 'checkTips' %}'">Cancel</button><br><br>
 
@@ -49,7 +49,7 @@
         var storageRef = storage.ref();
         var thisref = storageRef.child(file.name).put(file);
         thisref.on('state_changed', function (snapshot) {
-            console.log("Succesfully updated tips!");
+            console.log("Image Succesfully Uploaded!");
         },
             function (error) {
             },
@@ -58,7 +58,7 @@
                 var downloadURL = thisref.snapshot.downloadURL;
                 console.log("got url");
                 document.getElementById("url").value = downloadURL;
-                alert("Succesfully updated tips!");
+                alert("Image Succesfully Uploaded!");
             });
     }
 </script>
